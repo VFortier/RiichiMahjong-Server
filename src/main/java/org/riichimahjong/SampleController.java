@@ -1,4 +1,4 @@
-package hello;
+package org.riichimahjong;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class SampleController {
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping(value="/", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/queue/find", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
     String home() {
 	    return "{\"success\":1}";
