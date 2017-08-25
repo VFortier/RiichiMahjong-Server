@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @EnableAutoConfiguration
 public class SampleController {
 
-    @RequestMapping("/")
-    @ResponseBody
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value="/", method=RequestMethod.GET, produces = "application/json")
+	@ResponseBody
     String home() {
-        return "Hello World!";
+	    return "{\"success\":1}";
     }
 
     public static void main(String[] args) throws Exception {
