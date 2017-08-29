@@ -1,4 +1,4 @@
-package org.riichimahjong.domain;
+package org.riichimahjong.web.data;
 
 public class Player {
 	private String name;
