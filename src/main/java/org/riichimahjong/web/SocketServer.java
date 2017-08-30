@@ -27,45 +27,29 @@ import com.corundumstudio.socketio.listener.DataListener;
 @Configuration
 @ComponentScan("org.riichimahjong")
 @PropertySource("application-dev.properties") // TODO: automate env
-public class QueueController {
+public class SocketServer {
 	
 	@Value("${client.url}")
 	private final String clientUrl = "";
 	
 	private Map<UUID, ClientPlayer> playersInQueue = new LinkedHashMap<>();
 
-//	// @CrossOrigin(origins = clientUrl)		// TODO: Move to controller level
-//	@CrossOrigin(origins = "http://${client.url}")
-//	@RequestMapping(value="find", method=RequestMethod.POST, produces = "application/json")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void findGame(@RequestBody Player player) {
-//		playersInQueue.add(player);
-//		matchPlayers();
-//    }
-//
-//	private void matchPlayers() {
-//		if (playersInQueue.size() >= 4) {
-//			List<Player> playersForGame = playersInQueue.subList(0, 4);
-//			Game game = new Game(new ArrayList<Player>(playersForGame));
-//			playersForGame.clear();
-//			
-//			postGameToClient(game);
-//		}
-//	}
-// 
-//	private void postGameToClient(Game game) {
-//		RestTemplate restTemplate = new RestTemplate();
-//		Game response = restTemplate.postForObject(clientUrl + "/game/start", game, Game.class);		// Use url object
-//	}
-	
     @Bean(name="webSocketServer")
     public SocketIOServer webSocketServer() {
 
         com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
         config.setHostname("localhost"); // TODO
-        config.setPort(3600);  // TODO
+        config.setPort(9092);  // TODO
+        // config.setOrigin("localhost:4200");	// TODO
 
         final SocketIOServer server = new SocketIOServer(config);
+        
+        server.addConnectListener(new ConnectListener() {
+            @Override
+            public void onConnect(SocketIOClient client) {
+            	System.out.println("meow");
+            }
+        });
         
         server.addEventListener("find_game", Player.class, new DataListener<Player>() {
             @Override

@@ -1,17 +1,12 @@
 package org.riichimahjong;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.riichimahjong.web.SocketServer;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
 public class Application {
-
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        AbstractApplicationContext cxt = new AnnotationConfigApplicationContext(SocketServer.class);
+        cxt.registerShutdownHook();
     }
-
 }
