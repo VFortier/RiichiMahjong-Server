@@ -4,6 +4,8 @@ build/*
 .project
 .classpath
 .settings/
+.idea/
+*.iml
 
 # Compiled class file
 *.class
