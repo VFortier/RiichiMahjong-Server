@@ -1,8 +1,9 @@
 package org.riichimahjong.mahjong.model;
 
 public class Tile {
-    private String _tileShortName;  //a string describing the tile
-    private String _tileLongName;   //the displayed name of a tile
-    private boolean _redTile = false;
+    private Suit _suit; //TODO Enum
+    private String _number;
+    private String _longName;   //the displayed name of a tile
+    private boolean _isRedDora = false;
 
 }
